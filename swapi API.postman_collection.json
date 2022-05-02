@@ -1,0 +1,88 @@
+{
+	"info": {
+		"_postman_id": "7734dd3b-8f5f-4808-83bd-b1af9cd16c80",
+		"name": "swapi API",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Luke Skywalker",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"if (pm.response.json().homeworld !== null) {\r",
+							"    pm.environment.set('numberOfPlanet', pm.response.json().homeworld)\r",
+							"}"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "{{basicUrl}}people/1/",
+					"host": [
+						"{{basicUrl}}people"
+					],
+					"path": [
+						"1",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Planets",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Check planet name\", function () {\r",
+							"    var jsonaData = pm.response.json();\r",
+							"    pm.expect(jsonaData.name).to.eql(\"Tatooine\");\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"name\"\r\n}"
+				},
+				"url": {
+					"raw": "{{planetUrl}}",
+					"host": [
+						"{{planetUrl}}"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
